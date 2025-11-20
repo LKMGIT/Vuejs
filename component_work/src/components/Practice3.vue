@@ -1,28 +1,20 @@
 <script setup>
-import {ref, computed} from 'vue';
+import { ref, computed } from 'vue';
 
 const searchText = ref('');
-
-const warningMessage = computed(() => "10자를 초과했습니다!");
-
+const warningMessage = computed(() => '10자를 초과했습니다!');
 const showMsg = ref('');
 
-
-function checkMsg(searchText){
-    if(searchText.legth > 10){
-        showMsg = warningMessage;
-    }
-    else{
-        showMsg = searchText;
-    }
+function checkMsg() {
+  if (searchText.value.length > 10) {
+    showMsg.value = warningMessage.value;
+  } else {
+    showMsg.value = searchText.value;
+  }
 }
-
-
 </script>
 
 <template>
-
-<input v-model="searchText">    </input>
-<span> {{ showMsg }}</span>
-
+  <input v-model="searchText" @input="checkMsg" />
+  <span>{{ showMsg }}</span>
 </template>
